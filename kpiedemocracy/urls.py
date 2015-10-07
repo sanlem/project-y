@@ -20,9 +20,12 @@ import petitions.views
 
 router = routers.DefaultRouter()
 router.register(r'users', petitions.views.UserViewSet)
+router.register(r'petitions', petitions.views.PetitionViewSet)
 
 
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^api-auth/', include('rest_framework.urls',
+                               namespace='rest_framework')),
 ]
