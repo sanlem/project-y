@@ -28,5 +28,5 @@ urlpatterns = [
     url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
     url(r'^rest-auth/facebook/$', petitions.views.FacebookLogin.as_view(), name='fb_login'),
-    url(r'^rest-auth/vk/$', petitions.views.VKLogin, name='vk_login')
+    url(r'^rest-auth/vk/$', petitions.views.VKLogin.as_view(), name='vk_login')
 ]
