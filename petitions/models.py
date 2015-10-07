@@ -15,6 +15,6 @@ class Petition(models.Model):
     author = models.ForeignKey(User, related_name='petitions')
     deadline = models.DateTimeField()
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='V')
-    responsible = models.ForeignKey(User, related_name='responsible', blank=True, null=True)
+    responsible = models.CharField(max_length=50, blank=True, null=True)
     # TODO: mediacontent: photos and video
     created_at = models.DateTimeField(auto_now_add=True)
