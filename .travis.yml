@@ -1,8 +1,10 @@
-
 language: python
 python:
-  - "3.4"
+- '3.4'
 install:
-  - pip install -r requirements.txt
+- pip install -r requirements.txt
 script:
-  - python manage.py test
+- python manage.py test
+notifications:
+  slack:
+    secure: MBo0Dv3y3YhfrxcNIICPZlTL6bUijku3PgEmejgaNfblTkapIUeroUgIjAztXe8OXqGEX5WgBP02aOW9o8keAneZgOSAypwG7mOkubilB9M3yYnK97a3jfkyDKYaHuHhCNEycNy3uwY9FAKuyws1O53xV47EHaSZ9k1L6Tsc/HxxfQHaT5gfNInFktKZ6vJAyFtIAWhDLgnuSjmuq1FHfWPIX4PUwybH48BdNkECcx4nj209Z4lNJ3PYNujjoFi09rl7WaWTUYB75HZEfBjpzX06uK3NvhBRtlGdezkek9Xq+7902nAxPstP24b5sT6SsNIR1/tpDQDsT1op0mIvMMYGYuEoMV//p7HeTeYK5R76eOoa8gQ6d320E6PdFQapDPkvnPNKcEe15lgF2V/m3Suv4SzBjd2B+InEpxogtCNzSwm/N5+vrX3VaquCrZQDuEuKN1tSi9ssNNh+xzV99UIs/MP0FrjYjL1g8mT113uDBNlgW+yl+h0KtEcNz9wGJu7DwodziX4Ujw1CmojiDKaKSHPVBG72dxN+Pm6rAIzVzmb+IkBtBcL/RqccEd5zqxmXTzvZs0EVdUbEmy2os5XKLXiUyu7hRHVktG9wO0Y9roRGcj1Nk0Rw4NUXDk9ioVanMYovkVl5TP96qaZREWx6SywlzCNOVLk5Aq8gyjQ=
