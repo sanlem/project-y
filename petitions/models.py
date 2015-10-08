@@ -24,6 +24,8 @@ class Petition(models.Model):
 
 
 class PetitionSign(models.Model):
+    class Meta:
+        unique_together=('author', 'petition')
     author = models.ForeignKey(User, related_name='signed')
     petition = models.ForeignKey(Petition, related_name='signs')
     comment = models.TextField(max_length=200, null=True, blank=True)

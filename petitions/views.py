@@ -41,14 +41,15 @@ class PetitionSignViewSet(viewsets.ModelViewSet):
                 # TODO: return 404
                 pass
         return queryset
-
+    """
     def perform_create(self, serializer):
-        """
+        
         Checking if current user had already signed this petition
-        """
+        
         if PetitionSign.objects.all().filter(author=self.request.user).first() is None:
             
             serializer.save(author=self.request.user)
             print('saved')
         else:
-            return print('already signed')
+            print('already signed')
+    """
