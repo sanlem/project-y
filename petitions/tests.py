@@ -92,14 +92,14 @@ class TestUserResource(unittest.TestCase):
     def test_detail_nopermissions_anonymous(self):
         self.client.logout()
         response = self.client.get(reverse('user-detail', args=[self.get_user().id]))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     @classmethod
     def get_staff_user(cls):
-        if not hasattr(cls, "_user"):
-            cls._user = get_user_model()(username="Leia", is_staff=True)  # only staff have access to user resource now
-            cls._user.save()
-        return cls._user
+        if not hasattr(cls, "_staff_user"):
+            cls._staff_user = get_user_model()(username="Leia", is_staff=True)  # only staff have access to user resource now
+            cls._staff_user.save()
+        return cls._staff_user
 
     @classmethod
     def get_user(cls):
