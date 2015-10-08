@@ -4,10 +4,7 @@ from petitions.serializers import UserSerializerDetail, PetitionSerializerDetail
 from petitions.models import Petition
 from rest_framework import viewsets, permissions, status
 from petitions.permissions import IsAuthorOrReadOnly
-from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
-from rest_framework.reverse import reverse
-from rest_framework.views import APIView
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):

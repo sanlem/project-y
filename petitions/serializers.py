@@ -1,4 +1,3 @@
-import uuid
 from django.conf import settings
 import os
 from django.contrib.auth.models import User
