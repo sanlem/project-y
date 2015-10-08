@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from petitions.serializers import UserSerializer, PetitionSerializer
+from petitions.serializers import UserSerializerDetail, PetitionSerializer
 from petitions.models import Petition
 from rest_framework import viewsets, permissions
 from petitions.permissions import IsAuthorOrReadOnly
@@ -7,7 +7,7 @@ from petitions.permissions import IsAuthorOrReadOnly
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
+    serializer_class = UserSerializerDetail
 
 
 class PetitionViewSet(viewsets.ModelViewSet):
