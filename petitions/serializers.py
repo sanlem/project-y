@@ -9,15 +9,19 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'username')
 
 
-class UserSerializerDetail(serializers.HyperlinkedModelSerializer):
-    petitions = serializers.PrimaryKeyRelatedField(many=True, queryset=Petition.objects.all())
-    class Meta:
-        model = User
-        fields = ('url', 'username', 'petitions')
-
-
 class PetitionSerializer(serializers.HyperlinkedModelSerializer):
-    author = UserSerializer(read_only=True)
     class Meta:
         model = Petition
-        fields = ('title', 'text', 'author', 'deadline', 'responsible')
+        fields = ('url', 'title', 'text', 'deadline', 'responsible')
+
+
+class UserSerializerDetail(UserSerializer):
+    petitions = PetitionSerializer(many=True)
+    class Meta(UserSerializer.Meta):
+        fields = UserSerializer.Meta.fields + ('petitions',)
+
+
+class PetitionSerializerDetail(PetitionSerializer):
+    author = UserSerializer(read_only=True)
+    class Meta(PetitionSerializer.Meta):
+        fields = PetitionSerializer.Meta.fields + ('author',)

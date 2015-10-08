@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from petitions.serializers import UserSerializerDetail, PetitionSerializer
+from petitions.serializers import UserSerializerDetail, PetitionSerializerDetail
 from petitions.models import Petition
 from rest_framework import viewsets, permissions
 from petitions.permissions import IsAuthorOrReadOnly
@@ -12,7 +12,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 
 class PetitionViewSet(viewsets.ModelViewSet):
     queryset = Petition.objects.all().order_by('created_at')
-    serializer_class = PetitionSerializer
+    serializer_class = PetitionSerializerDetail
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly)
 
     def perform_create(self, serializer):
