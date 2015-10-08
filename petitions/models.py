@@ -18,3 +18,13 @@ class Petition(models.Model):
     responsible = models.CharField(max_length=50, blank=True, null=True)
     # TODO: mediacontent: photos and video
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.pk)
+
+
+class PetitionSign(models.Model):
+    author = models.ForeignKey(User, related_name='signed')
+    petition = models.ForeignKey(Petition, related_name='signs')
+    comment = models.TextField(max_length=200, null=True, blank=True)
+    anonymous = models.BooleanField(default=False)
