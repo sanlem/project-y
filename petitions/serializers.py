@@ -46,17 +46,19 @@ class PetitionSerializerDetail(PetitionSerializer):
         media_data = validated_data.pop('media')
         petition = Petition.objects.create(**validated_data)
         for media_item in media_data:
-            Media.objects.get_or_create(petition=petition, **media_item)
+            if 'id' in media_item:
+                raise serializers.ValidationError("Don't add new media with id field")
+            Media.objects.create(petition=petition, **media_item)
         return petition
 
     def update(self, instance, validated_data):
         if 'media' in validated_data: # for PATCH request
             media_data = validated_data.pop('media')
-            new_media_ids = set(obj['id'] for obj in media_data if 'id' in obj)
+            updated_media_ids = set(obj['id'] for obj in media_data if 'id' in obj)
             existing_media_ids = set(obj.id for obj in instance.media.all())
 
-            new_media = new_media_ids.difference(existing_media_ids)
-            if len( new_media_ids.intersection(new_media) ) != 0:
+            new_media = updated_media_ids.difference(existing_media_ids)
+            if len( updated_media_ids.intersection(new_media) ) != 0:
                 raise serializers.ValidationError("Don't add new media with id field")
 
             # update existing items and add new

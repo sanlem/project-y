@@ -128,6 +128,11 @@ class TestPetitionsResource(unittest.TestCase):
         response = self.client.put(response_data["url"], data=petition, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+        petition = PETITION.copy()
+        petition.update({"media": [{"id": 42, "mediaUrl": "http://example.com/image.jpg", "type": "image"}]})
+        response = self.client.post(reverse('petition-list'), data=petition, format="json")
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
     def test_remove_media(self):
         self.client.force_authenticate(self.get_user())
         petition = PETITION.copy()
