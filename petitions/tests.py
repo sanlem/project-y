@@ -147,6 +147,23 @@ class TestPetitionsResource(unittest.TestCase):
         self.assertEqual(len(Media.objects.all()), count_before_post - 1)
         self.assertEqual(len(response_data["media"]), 0)
 
+    def test_remove_petition(self):
+        self.client.force_authenticate(self.get_user())
+        petition = PETITION.copy()
+        petition.update({"media": [{"mediaUrl": "http://example.com/image.jpg", "type": "image"}]})
+
+        response = self.client.post(reverse('petition-list'), data=petition, format="json")
+        response_data = json.loads(response.content.decode())
+
+        petition_count_before_post = len(Petition.objects.all())
+        media_count_before_post = len(Media.objects.all())
+
+        response = self.client.delete(response_data["url"])
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+        self.assertEqual(len(Petition.objects.all()), petition_count_before_post - 1)
+        self.assertEqual(len(Media.objects.all()), media_count_before_post - 1)
+
     @classmethod
     def get_user(cls):
         if not hasattr(cls, "_user"):
