@@ -16,5 +16,16 @@ class Petition(models.Model):
     deadline = models.DateTimeField()
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='V')
     responsible = models.CharField(max_length=50, blank=True, null=True)
-    # TODO: mediacontent: photos and video
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+MEDIA_TYPE_CHOICES = (
+    ('image', 'Image'),
+    ('video', 'Video'),
+)
+
+
+class Media(models.Model):
+    mediaUrl = models.URLField()
+    type = models.CharField(choices=MEDIA_TYPE_CHOICES, max_length=10)
+    petition = models.ForeignKey(Petition, related_name='media')

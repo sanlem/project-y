@@ -3,7 +3,7 @@ import logging
 import unittest
 import sys
 from django.contrib.auth import get_user_model
-from petitions.models import Petition
+from petitions.models import Petition, Media
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APIClient
@@ -50,12 +50,102 @@ class TestPetitionsResource(unittest.TestCase):
 
     def test_creation(self):
         self.client.logout()
-        response = self.client.post(reverse('petition-list'), data=PETITION, format="json")
+        petition = PETITION.copy()
+        petition.update({"media": []})
+        response = self.client.post(reverse('petition-list'), data=petition, format="json")
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
         self.client.force_authenticate(self.get_user())
-        response = self.client.post(reverse('petition-list'), data=PETITION, format="json")
+        response = self.client.post(reverse('petition-list'), data=petition, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_create_with_media(self):
+        self.client.force_authenticate(self.get_user())
+        petition = PETITION.copy()
+        petition.update({"media": [{"mediaUrl": "http://example.com/image.jpg", "type": "image"}]})
+
+        count_before_post = len(Media.objects.all())
+        response = self.client.post(reverse('petition-list'), data=petition, format="json")
+        self.assertEqual(len(Media.objects.all()), count_before_post + 1)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        response_data = json.loads(response.content.decode())
+        self.assertEqual(response_data["media"][0]["mediaUrl"], "http://example.com/image.jpg")
+        self.assertIn("id", response_data["media"][0])
+
+    def test_change_media(self):
+        self.client.force_authenticate(self.get_user())
+        petition = PETITION.copy()
+        petition.update({"media": [{"mediaUrl": "http://example.com/image.jpg", "type": "image"}]})
+
+        response = self.client.post(reverse('petition-list'), data=petition, format="json")
+        response_data = json.loads(response.content.decode())
+        created_media_id = response_data["media"][0]["id"]
+        petition.update({
+            "url": response_data["url"],
+            "media": [{"id": created_media_id,
+                       "mediaUrl": "http://example.com/changedImage.jpg", "type": "image"}]
+        })
+
+        count_before_post = len(Media.objects.all())
+        response = self.client.put(response_data["url"], data=petition, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response_data = json.loads(response.content.decode())
+        self.assertEqual(len(Media.objects.all()), count_before_post)
+        self.assertEqual(response_data["media"][0]["mediaUrl"], "http://example.com/changedImage.jpg")
+
+    def test_add_media(self):
+        self.client.force_authenticate(self.get_user())
+        petition = PETITION.copy()
+        petition.update({"media": []})
+
+        response = self.client.post(reverse('petition-list'), data=petition, format="json")
+        response_data = json.loads(response.content.decode())
+        petition.update({
+            "url": response_data["url"],
+            "media": [{"mediaUrl": "http://example.com/image.jpg", "type": "image"}]
+        })
+
+        count_before_post = len(Media.objects.all())
+        response = self.client.put(response_data["url"], data=petition, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response_data = json.loads(response.content.decode())
+        self.assertEqual(len(Media.objects.all()), count_before_post + 1)
+        self.assertEqual(response_data["media"][0]["mediaUrl"], "http://example.com/image.jpg")
+
+    def test_no_add_media_with_id(self):
+        self.client.force_authenticate(self.get_user())
+        petition = PETITION.copy()
+        petition.update({"media": []})
+
+        response = self.client.post(reverse('petition-list'), data=petition, format="json")
+        response_data = json.loads(response.content.decode())
+        petition.update({
+            "url": response_data["url"],
+            "media": [{"id": 42, "mediaUrl": "http://example.com/image.jpg", "type": "image"}]
+        })
+
+        response = self.client.put(response_data["url"], data=petition, format="json")
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_remove_media(self):
+        self.client.force_authenticate(self.get_user())
+        petition = PETITION.copy()
+        petition.update({"media": [{"mediaUrl": "http://example.com/image.jpg", "type": "image"}]})
+
+        response = self.client.post(reverse('petition-list'), data=petition, format="json")
+        response_data = json.loads(response.content.decode())
+        petition.update({
+            "url": response_data["url"],
+            "media": []
+        })
+
+        count_before_post = len(Media.objects.all())
+        response = self.client.put(response_data["url"], data=petition, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response_data = json.loads(response.content.decode())
+        self.assertEqual(len(Media.objects.all()), count_before_post - 1)
+        self.assertEqual(len(response_data["media"]), 0)
 
     @classmethod
     def get_user(cls):
