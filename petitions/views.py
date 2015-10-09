@@ -26,15 +26,6 @@ class PetitionSignViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly)
     filter_fields = ('petition',)
 
-    """
+    
     def perform_create(self, serializer):
-        
-        Checking if current user had already signed this petition
-        
-        if PetitionSign.objects.all().filter(author=self.request.user).first() is None:
-            
-            serializer.save(author=self.request.user)
-            print('saved')
-        else:
-            print('already signed')
-    """
+        serializer.save(author=self.request.user)
