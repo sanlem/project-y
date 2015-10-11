@@ -5,11 +5,10 @@ from django.contrib.auth.models import User
 from django.core.files.storage import default_storage
 from petitions.utils import generate_unique_upload_filename
 from rest_framework import serializers
-from petitions.models import Petition, Media
+from petitions.models import Petition, Media, PetitionSign
 from rest_framework.fields import empty
 
 IMAGES_UPLOAD_DIRECTORY = 'uploadedImages'
-
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -17,10 +16,18 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'username')
 
 
+class PetitionSignSerializer(serializers.HyperlinkedModelSerializer):
+    author = serializers.ReadOnlyField(source='author.username')
+    #petition = serializers.ReadOnlyField(source='petiton.id')
+    class Meta:
+        model = PetitionSign
+        fields = ['petition', 'comment', 'anonymous', 'author']
+
 class PetitionSerializer(serializers.HyperlinkedModelSerializer):
+    signs = PetitionSignSerializer(many=True, read_only=True)
     class Meta:
         model = Petition
-        fields = ('url', 'title', 'text', 'deadline', 'responsible')
+        fields = ('url', 'title', 'text', 'deadline', 'responsible', 'signs')
 
 
 class UserSerializerDetail(UserSerializer):
