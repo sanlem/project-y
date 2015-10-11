@@ -8,6 +8,7 @@ from rest_framework import serializers
 from petitions.models import Petition, Media, PetitionSign
 from rest_framework.fields import empty
 
+
 IMAGES_UPLOAD_DIRECTORY = 'uploadedImages'
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -25,9 +26,10 @@ class PetitionSignSerializer(serializers.HyperlinkedModelSerializer):
 
 class PetitionSerializer(serializers.HyperlinkedModelSerializer):
     signs = PetitionSignSerializer(many=True, read_only=True)
+    status = serializers.ReadOnlyField()
     class Meta:
         model = Petition
-        fields = ('url', 'title', 'text', 'deadline', 'responsible', 'signs')
+        fields = ('url', 'title', 'text', 'deadline', 'responsible', 'signs', 'status')
 
 
 class UserSerializerDetail(UserSerializer):
