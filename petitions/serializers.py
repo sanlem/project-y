@@ -8,6 +8,7 @@ from rest_framework import serializers
 from petitions.models import Petition, Media, PetitionSign
 from rest_framework.fields import empty
 
+
 IMAGES_UPLOAD_DIRECTORY = 'uploadedImages'
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
