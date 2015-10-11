@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 2
 
 # Application definition
 
@@ -37,9 +38,21 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'rest_framework',
-    'petitions'
+    'rest_framework.authtoken',
+    'rest_auth',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.vk',
+
+    'petitions',
 )
+
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -65,6 +78,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.request',
+                'allauth.account.context_processors.account',
+                'allauth.socialaccount.context_processors.socialaccount'
             ],
         },
     },
@@ -112,5 +128,20 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
-
 FILE_UPLOAD_HANDLERS = ["django.core.files.uploadhandler.MemoryFileUploadHandler"]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+LOGIN_REDIRECT_URL = '/'
+SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'SCOPE': ['email'],
+        'AUTH_PARAMS': {'auth_type':'reauthenticate'},
+        'METHOD': 'oauth2',
+        'VERIFIED_EMAIL': False
+    }
+}

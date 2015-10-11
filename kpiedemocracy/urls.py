@@ -29,8 +29,14 @@ router.register(r'images', petitions.views.ImageUploadViewSet, 'image')
 urlpatterns = [
     url(r'^api/v1/', include(router.urls)),
     url(r'^admin/', include(admin.site.urls)),
+
     url(r'^api-auth/', include('rest_framework.urls',
                                namespace='rest_framework')),
+    url(r'^accounts/', include('allauth.urls')),
+    url(r'^rest-auth/', include('rest_auth.urls')),
+    url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
+    url(r'^rest-auth/facebook/$', petitions.views.FacebookLogin.as_view(), name='fb_login'),
+    url(r'^rest-auth/vk/$', petitions.views.VKLogin.as_view(), name='vk_login')
 ]
 
 if settings.DEBUG:
