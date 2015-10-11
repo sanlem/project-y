@@ -25,9 +25,10 @@ class PetitionSignSerializer(serializers.HyperlinkedModelSerializer):
 
 class PetitionSerializer(serializers.HyperlinkedModelSerializer):
     signs = PetitionSignSerializer(many=True, read_only=True)
+    status = serializers.ReadOnlyField()
     class Meta:
         model = Petition
-        fields = ('url', 'title', 'text', 'deadline', 'responsible', 'signs')
+        fields = ('url', 'title', 'text', 'deadline', 'responsible', 'signs', 'status')
 
 
 class UserSerializerDetail(UserSerializer):
