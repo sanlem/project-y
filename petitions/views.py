@@ -1,8 +1,9 @@
 from django.conf import settings
 from django.contrib.auth.models import User
-from petitions.serializers import UserSerializerDetail, PetitionSerializerDetail, ImageUploadSerializer
-from petitions.models import Petition
-from rest_framework import viewsets, permissions, status
+
+from petitions.serializers import UserSerializerDetail, PetitionSerializerDetail, ImageUploadSerializer, PetitionSignSerializer
+from petitions.models import Petition, PetitionSign
+from rest_framework import viewsets, permissions, status, filters
 from petitions.permissions import IsAuthorOrReadOnly
 from rest_framework.response import Response
 from rest_framework import viewsets
@@ -43,3 +44,13 @@ class ImageUploadViewSet(viewsets.ViewSet):
             return Response({"url": image_url}, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class PetitionSignViewSet(viewsets.ModelViewSet):
+    queryset = PetitionSign.objects.all()
+    serializer_class = PetitionSignSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly)
+    filter_fields = ('petition',)
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)

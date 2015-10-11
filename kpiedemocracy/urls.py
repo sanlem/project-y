@@ -24,6 +24,7 @@ router = routers.DefaultRouter()
 router.register(r'users', petitions.views.UserViewSet)
 router.register(r'petitions', petitions.views.PetitionViewSet)
 router.register(r'images', petitions.views.ImageUploadViewSet, 'image')
+router.register(r'petition_signs', petitions.views.PetitionSignViewSet)
 
 
 urlpatterns = [
