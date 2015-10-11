@@ -55,7 +55,7 @@ class PetitionSignViewSet(viewsets.ModelViewSet):
     filter_fields = ('petition',)
 
     def perform_create(self, serializer):
-        #serializer.save(author=self.request.user)
+        serializer.save(author=self.request.user)
         petition = serializer.validated_data["petition"]
         if len(PetitionSign.objects.filter(petition=petition)) == VOTE_GOAL:
             petition.status = "A"
