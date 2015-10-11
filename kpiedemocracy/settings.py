@@ -78,9 +78,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.request',
-                'allauth.account.context_processors.account',
-                'allauth.socialaccount.context_processors.socialaccount'
+                'django.core.context_processors.request'
             ],
         },
     },
@@ -140,8 +138,19 @@ SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
         'SCOPE': ['email'],
-        'AUTH_PARAMS': {'auth_type':'reauthenticate'},
-        'METHOD': 'oauth2',
-        'VERIFIED_EMAIL': False
+        'METHOD': 'js_sdk',
+        'VERIFIED_EMAIL': True,
+        'FIELDS': [
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name'
+        ]
     }
 }
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
