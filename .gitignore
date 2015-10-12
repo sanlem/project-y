@@ -60,3 +60,7 @@ venv
 .idea
 *.sqlite3
 media
+
+
+ui-dist
+node_modules
