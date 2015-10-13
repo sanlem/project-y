@@ -5,6 +5,7 @@ from petitions.serializers import UserSerializerDetail, PetitionSerializerDetail
 from petitions.models import Petition, PetitionSign
 from rest_framework import viewsets, permissions, status, filters
 from petitions.permissions import IsAuthorOrReadOnly
+from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
 from rest_framework import viewsets
 from allauth.socialaccount.providers.vk.views import VKOAuth2Adapter
@@ -21,6 +22,11 @@ class VKLogin(SocialLoginView):
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializerDetail
+
+    @list_route()
+    def me(self, request):
+        serializer = UserSerializerDetail(request.user, context={'request': request})
+        return Response(serializer.data)
 
 
 class PetitionViewSet(viewsets.ModelViewSet):
