@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.vk',
     'petitions',
+    'rest_framework_swagger',
 )
 
 
@@ -153,6 +154,6 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USERNAME_REQUIRED = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
