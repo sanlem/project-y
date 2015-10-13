@@ -7,6 +7,7 @@ from petitions.utils import generate_unique_upload_filename
 from rest_framework import serializers
 from petitions.models import Petition, Media, PetitionSign
 from rest_framework.fields import empty
+from rest_framework.reverse import reverse
 
 
 IMAGES_UPLOAD_DIRECTORY = 'uploadedImages'
@@ -25,11 +26,16 @@ class PetitionSignSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['petition', 'comment', 'anonymous', 'author']
 
 class PetitionSerializer(serializers.HyperlinkedModelSerializer):
-    signs = PetitionSignSerializer(many=True, read_only=True)
+    signs = serializers.SerializerMethodField()
+
+    def get_signs(self, obj):
+        return 'http://127.0.0.1:8000' + reverse('petitionsign-list') + '?petition=' + str(obj.id)
+
     status = serializers.ReadOnlyField()
+    sign_count = serializers.ReadOnlyField(source='signs.count')
     class Meta:
         model = Petition
-        fields = ('url', 'title', 'text', 'deadline', 'responsible', 'signs', 'status')
+        fields = ('url', 'title', 'text', 'deadline', 'responsible', 'signs', 'status', 'sign_count')
 
 
 class UserSerializerDetail(UserSerializer):
