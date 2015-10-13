@@ -29,7 +29,10 @@ class PetitionSerializer(serializers.HyperlinkedModelSerializer):
     signs = serializers.SerializerMethodField()
 
     def get_signs(self, obj):
-        return 'http://127.0.0.1:8000' + reverse('petitionsign-list') + '?petition=' + str(obj.id)
+        request = self.context.get('request', None)
+        if request is None:
+            raise serializers.ValidationError("Request is not in context of serializer")
+        return request.build_absolute_uri(reverse('petitionsign-list') + '?petition=' + str(obj.id))
 
     status = serializers.ReadOnlyField()
     sign_count = serializers.ReadOnlyField(source='signs.count')
