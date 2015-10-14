@@ -17,6 +17,7 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.views.generic import RedirectView
 from rest_framework import routers
 import petitions.views
 
@@ -28,6 +29,8 @@ router.register(r'petition_signs', petitions.views.PetitionSignViewSet)
 
 
 urlpatterns = [
+    url(r'^$', RedirectView.as_view(url='/static/index.html', permanent=False)),
+
     url(r'^api/v1/', include(router.urls)),
     url(r'^admin/', include(admin.site.urls)),
 
