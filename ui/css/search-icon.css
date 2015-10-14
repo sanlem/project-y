@@ -1,0 +1,29 @@
+#searchform{
+  display:inline;
+  font-size:1em;
+  padding-right:15px;
+  padding-bottom:4px;
+  background:white;
+  border-bottom:2px solid #969696;
+}
+#s{
+  transition:all 0.2s ease-out;
+  width:10px;
+  border-radius:0;
+  box-shadow:none;
+  outline: none;
+  padding:10px;
+  margin-left:-10px;
+  border:0;
+  background-color: transparent;
+  opacity:0;
+  cursor:pointer;
+}
+#s:focus {
+  width:8em;
+  opacity:1;
+}
+label{
+  display:inline-block;
+  position: relative;
+}

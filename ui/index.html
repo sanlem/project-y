@@ -1,10 +1,281 @@
 <!DOCTYPE html>
 <html>
-  <head></head>
-  <body>
-    <div id="app"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react.min.js"></script>
+<head>
+      <title>kpi-retitions</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="css/search-icon.css">
+      <link rel="stylesheet" href="css/progressbar.css">
+      <link rel="stylesheet" href="css/responsive.css">
+      <!-- Fonts -->
+      <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+      <!-- Font awesome -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-    <script src="js/app.js"></script>
-  </body>
+      <!-- Bootstrap -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+</head>
+<body>
+      <header>
+            <div id="anchor"></div>
+            <div class="wrapper">
+                  <div class="left-buttons">
+                        <a class="logo" href="#">#kpi-petitions</a>
+                        <ul class="menu">
+                              <a href="#" class="active">
+                                    <li>Активні петиції</li>
+                              </a>
+                              <a href="#" class="new">
+                                    <li>Нові петиції</li>
+                              </a>
+                              <a href="#" class="archive">
+                                    <li>Архів петицій</li>
+                              </a>
+                        </ul>
+                        <div class="search">
+                              <form role="search" method="get" id="searchform" action="">
+                                    <label for="s">
+                                        <i class="fa fa-search"></i>
+                                    </label>
+                                    <input type="text" value="" placeholder="search" class="" id="s" />
+                              </form>
+                        </div>
+                  </div>
+                  <div class="right-buttons">
+                        <ul class="sign">
+                              <a href="#" class="registration"><li>Реєстрація</li></a>
+                              <a href="#" class="signin"><li>Вхід</li></a>
+                        </ul>
+                  </div>
+            </div>
+      </header>
+      <div class="main">
+            <div class="create">
+                <div class="wrapper">
+                        <div class="create-wrapper">
+                              <div class="title"><h1>Тут буде якийсь тайтл...</h1></div>
+                              <div class="more-title"><h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</h4></div>
+                              <a href="" class="create-button"> Створити петицію</a>
+                        </div>
+                  </div>
+            </div>
+            <div class="create-background"></div>
+            <div class="main-part">
+                  <div class="wrapper">
+                        <div class="petitions">
+                              <div class="block b1">
+                                    <div class="image">
+                                          <img src="http://i.imgur.com/Puiq9kA.jpg">
+                                          <div class="cover-img"></div>
+                                          <div class="progress-bar">
+                                                <div class="progress-radial progress-0">
+                                                <div class="overlay">0/100</div>
+                                                </div>
+                                          </div>
+                                    </div>
+                                    <div class="content">
+                                          <div class="petition-title">
+                                                <h4>Назва петиції буде тут...</h4>
+                                          </div>
+                                          <div class="petition-name">
+                                                <p>Іванов Іван</p>
+                                          </div>
+                                          <div class="petition-content">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                                          </div>
+                                          <div class="petition-tags">
+                                                <a href="" class="tag">Тег1</a>
+                                                <a href="" class="tag">Тег2</a>
+                                                <a href="" class="tag">Тег3</a>
+                                                <a href="" class="tag">Тег4</a>
+                                          </div>
+                                          <div class="petition-buttons">
+                                                <div class="time">10 жовтня 2015</div>
+                                                <div class="btns">
+                                                      <a href="#" class="more"><i class="fa fa-expand"> </i> Переглянути</a>
+                                                      <a href="#" class="vote"><i class="fa fa-heart"></i> Підтримати</a>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="block b2">
+                                    <div class="image">
+                                          <img src="http://i.imgur.com/Puiq9kA.jpg">
+                                          <div class="cover-img"></div>
+                                          <div class="progress-bar">
+                                                <div class="progress-radial progress-25">
+                                                <div class="overlay">25/100</div>
+                                                </div>
+                                          </div>
+                                    </div>
+                                    <div class="content">
+                                          <div class="petition-title">
+                                                <h4>Назва петиції буде тут...</h4>
+                                          </div>
+                                          <div class="petition-name">
+                                                <p>Іванов Іван</p>
+                                          </div>
+                                          <div class="petition-content">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                                          </div>
+                                          <div class="petition-tags">
+                                                <a href="" class="tag">Тег1</a>
+                                                <a href="" class="tag">Тег2</a>
+                                          </div>
+                                          <div class="petition-buttons">
+                                                <div class="time">10 жовтня 2015</div>
+                                                <div class="btns">
+                                                      <a href="#" class="more"><i class="fa fa-expand"> </i> Переглянути</a>
+                                                      <a href="#" class="vote"><i class="fa fa-heart"></i> Підтримати</a>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="block b3">
+                                    <div class="image">
+                                          <img src="http://i.imgur.com/Puiq9kA.jpg">
+                                          <div class="cover-img"></div>
+                                          <div class="progress-bar">
+                                                <div class="progress-radial progress-40">
+                                                <div class="overlay">40/100</div>
+                                                </div>
+                                          </div>
+                                    </div>
+                                    <div class="content">
+                                          <div class="petition-title">
+                                                <h4>Назва петиції буде тут...</h4>
+                                          </div>
+                                          <div class="petition-name">
+                                                <p>Іванов Іван</p>
+                                          </div>
+                                          <div class="petition-content">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                          </div>
+                                          <div class="petition-tags">
+                                                <a href="" class="tag">Тег1</a>
+                                                <a href="" class="tag">Тег2</a>
+                                                <a href="" class="tag">Тег3</a>
+                                          </div>
+                                          <div class="petition-buttons">
+                                                <div class="time">10 жовтня 2015</div>
+                                                <div class="btns">
+                                                      <a href="#" class="more"><i class="fa fa-expand"> </i> Переглянути</a>
+                                                      <a href="#" class="vote"><i class="fa fa-heart"></i> Підтримати</a>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="block b4">
+                                    <div class="image">
+                                          <img src="http://i.imgur.com/Puiq9kA.jpg">
+                                          <div class="cover-img"></div>
+                                          <div class="progress-bar">
+                                                <div class="progress-radial progress-75">
+                                                <div class="overlay">75/100</div>
+                                                </div>
+                                          </div>
+                                    </div>
+                                    <div class="content">
+                                          <div class="petition-title">
+                                                <h4>Назва петиції буде тут...</h4>
+                                          </div>
+                                          <div class="petition-name">
+                                                <p>Іванов Іван</p>
+                                          </div>
+                                          <div class="petition-content">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                          </div>
+                                          <div class="petition-tags">
+                                                <a href="" class="tag">Тег1</a>
+                                                <a href="" class="tag">Тег2</a>
+                                                <a href="" class="tag">Тег3</a>
+                                                <a href="" class="tag">Тег4</a>
+                                          </div>
+                                          <div class="petition-buttons">
+                                                <div class="time">10 жовтня 2015</div>
+                                                <div class="btns">
+                                                      <a href="#" class="more"><i class="fa fa-expand"> </i> Переглянути</a>
+                                                      <a href="#" class="vote"><i class="fa fa-heart"></i> Підтримати</a>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="block b5">
+                                    <div class="image">
+                                          <img src="http://i.imgur.com/Puiq9kA.jpg">
+                                          <div class="cover-img"></div>
+                                          <div class="progress-bar">
+                                                <div class="progress-radial progress-100">
+                                                <div class="overlay">100/100</div>
+                                                </div>
+                                          </div>
+                                    </div>
+                                    <div class="content">
+                                          <div class="petition-title">
+                                                <h4>Назва петиції буде тут...</h4>
+                                          </div>
+                                          <div class="petition-name">
+                                                <p>Іванов Іван</p>
+                                          </div>
+                                          <div class="petition-content">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                          </div>
+                                          <div class="petition-tags">
+                                                <a href="" class="tag">Тег1</a>
+                                                <a href="" class="tag">Тег2</a>
+                                                <a href="" class="tag">Тег3</a>
+                                                <a href="" class="tag">Тег4</a>
+                                          </div>
+                                          <div class="petition-buttons">
+                                                <div class="time">10 жовтня 2015</div>
+                                                <div class="btns">
+                                                      <a href="#" class="more"><i class="fa fa-expand"> </i> Переглянути</a>
+                                                      <a href="#" class="vote"><i class="fa fa-heart"></i> Підтримати</a>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="aside"></div>
+                              <div class="as tags">
+                                    <h4>Популярні теги</h4>
+                                    <div class="popular-tags">
+                                          <a href="" class="tag">Тег1</a>
+                                          <a href="" class="tag">Тег2</a>
+                                          <a href="" class="tag">Довгий тег</a>
+                                          <a href="" class="tag">Тег4</a>
+                                          <a href="" class="tag">Трохи довший тег</a>
+                                          <a href="" class="tag">Тег2</a>
+                                          <a href="" class="tag">Тег3</a>
+                                          <a href="" class="tag">Довгий тег</a>
+                                          <a href="" class="tag">Тег1</a>
+                                          <a href="" class="tag">Тег2</a>
+                                          <a href="" class="tag">Трохи довший тег</a>
+                                          <a href="" class="tag">Тег4</a>
+                                          <a href="" class="tag">Тег2</a>
+                                          <a href="" class="tag">Трохи довший тег</a>
+                                          <a href="" class="tag">Тег4</a>
+                                          <a href="" class="tag">Тег1</a>
+                                          <a href="" class="tag">Тег2</a>
+                                    </div>
+                              </div>
+                              <div class="as popular"></div>
+                              <div class="as footer"></div>
+                        </div>
+                  </div>
+      </div>
+      <footer>
+            <div class="wrapper">
+                  <div class="more-block"><a href="#" class="more-petitions">Більше петицій</a></div>
+                  <div class="up-block"><a href="#anchor" class="up"><i class="fa fa-chevron-up fa-2x"></i></a></div>
+            </div>
+      </footer>
+      <!-- Latest compiled and minified JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
 </html>
