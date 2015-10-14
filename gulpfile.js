@@ -56,3 +56,5 @@ gulp.task('serve', function() {
 });
 
 gulp.task('default', ['watch', 'serve']);
+gulp.task('production', ['build']);
+
