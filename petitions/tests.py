@@ -3,10 +3,11 @@ import logging
 import unittest
 import sys
 from django.contrib.auth import get_user_model
-from petitions.models import Petition, Media
+from petitions.models import Petition, Media, PetitionSign
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APIClient
+from django.conf import settings
 
 
 logger = logging.getLogger(__name__)
@@ -218,3 +219,90 @@ class TestUserResource(unittest.TestCase):
             cls._user = get_user_model()(username="Darth")
             cls._user.save()
         return cls._user
+
+PETITION_SIGN = {
+            "comment": "Whatever",
+            "anonymous": "False",
+        }
+
+class TestPetitionSignResource(unittest.TestCase):
+    def setUp(self):
+        self.client = APIClient()
+
+    def test_list(self):
+        self.client.logout()
+        response = self.client.get(reverse('petitionsign-list'))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response_data = json.loads(response.content.decode())
+        self.assertEqual(len(response_data["results"]), len(PetitionSign.objects.all()))
+
+    def test_detail(self):
+        self.client.logout()
+        petition = self.get_petition()
+        sign = PetitionSign(author=self.get_users()[0], petition=petition, **PETITION_SIGN)
+        sign.save()
+        response = self.client.get(reverse('petitionsign-detail', args=[sign.id]))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        
+        response_data = json.loads(response.content.decode())
+        self.assertTrue(isinstance(response_data["comment"], str))
+        self.assertEqual(response_data["author"], sign.author.username)
+
+    def test_creation(self):
+        users = self.get_users()
+        sign = self.set_sign_content()
+        # trying to create with anonymous user
+        self.client.logout()
+        response = self.client.post(reverse("petitionsign-list"), data=sign, format="json")
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        
+        # we use self.get_users[0] to create a sign in test_detail, so here we use another user
+        self.client.force_authenticate(users[1])
+        response = self.client.post(reverse("petitionsign-list"), data=sign, format="json")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_petition_status_updating_if_signs_goal_reached(self):
+        PetitionSign.objects.all().delete()
+        petition = self.get_petition()
+        self.assertEqual(petition.status, "V")
+        users = self.get_users()
+        sign = self.set_sign_content()
+        for user in users:
+            self.client.logout()
+            self.client.force_authenticate(user)
+            response = self.client.post(reverse("petitionsign-list"), data=sign, format="json")
+            self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        
+        signs = PetitionSign.objects.filter(petition=petition)
+        self.assertEqual(len(users), len(signs))
+        petition.refresh_from_db()
+        self.assertEqual(petition.status, "A")
+
+    # setting sign content. method was created to keep the code DRY
+    @classmethod
+    def set_sign_content(cls):
+        petition = cls.get_petition()
+        petition_url = "http://testhost" + reverse('petition-detail', args=[petition.id])
+        sign = PETITION_SIGN.copy()
+        sign.update({"petition": petition_url})
+        return sign    
+
+    @classmethod
+    def get_users(cls):
+        # we should create as many users, as we need do reach goal of signs
+        num = settings.SIGNS_GOAL
+        if not hasattr(cls, "_users"):
+            cls._users = []
+            username = "testuser"
+            for i in range(num):
+                cls._users.append(get_user_model()(username=username + str(i)))
+                cls._users[i].save()   
+        return cls._users
+
+    @classmethod
+    def get_petition(cls):
+        if not hasattr(cls, "_petition"):
+            user = cls.get_users()[0]
+            cls._petition = Petition(author=user, **PETITION)
+            cls._petition.save()
+        return cls._petition    

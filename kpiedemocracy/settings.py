@@ -173,3 +173,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
+# Needed number of signs
+SIGNS_GOAL = 1000
+if DEBUG:
+    SIGNS_GOAL = 5
