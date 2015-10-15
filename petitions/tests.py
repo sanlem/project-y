@@ -296,8 +296,7 @@ class TestPetitionSignResource(unittest.TestCase):
             username = "testuser"
             for i in range(num):
                 cls._users.append(get_user_model()(username=username + str(i)))
-                cls._users[i].save()
-            print("created ", len(cls._users)," SIGNS_GOAL", settings.SIGNS_GOAL)    
+                cls._users[i].save()   
         return cls._users
 
     @classmethod
