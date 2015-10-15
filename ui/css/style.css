@@ -127,7 +127,7 @@ header{
       float:left;
 }
 .block{
-      width:768px;
+      max-width:768px;
       height:250px;
       margin:35px 25px 35px 0;
       background:#fff;
@@ -146,7 +146,7 @@ header{
       text-align:left;
 }
 .popular{
-      height:300px;
+      min-height:350px;
 }
 .footer{
       height:500px;
@@ -241,7 +241,7 @@ header{
       color:#959595;
 }
 /* aside */
-.tags h4{
+.tags h4, .popular h4{
       margin:10px 0 10px 15px;
 }
 .popular-tags{
@@ -253,7 +253,7 @@ header{
       margin:5px 5px;
 }
 /* footer (always below) */
-footer{
+.more-button-block{
       width:100%;
       float:left;
       margin:80px 0;
@@ -280,4 +280,31 @@ footer{
       position:relative;
       margin-top:50px;
       color:#009688;
+}
+/* popular petition */
+.pop-petition{
+      color:#656565;
+      text-align:left;
+}
+.pop-petition h4{
+      font-size:15px;
+      margin:0;
+      font-weight:bold;
+}
+.inline{
+      display:inline-block;
+}
+.mini-bar{
+      height:60px;
+}
+.mini-title{
+      min-height:60px;
+      padding-top:15px;
+}
+.border{
+      border-bottom:1px solid #eeeeee;
+}
+.pop-petition:hover, .pop-petition:focus, .pop-petition:active{
+      text-decoration:none;
+      color:#656565;
 }
