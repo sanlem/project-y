@@ -52,8 +52,6 @@ class ImageUploadViewSet(viewsets.ViewSet):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-VOTE_GOAL = 1000
-
 class PetitionSignViewSet(viewsets.ModelViewSet):
     queryset = PetitionSign.objects.all()
     serializer_class = PetitionSignSerializer
@@ -63,6 +61,6 @@ class PetitionSignViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
         petition = serializer.validated_data["petition"]
-        if len(PetitionSign.objects.filter(petition=petition)) >= VOTE_GOAL:
+        if len(PetitionSign.objects.filter(petition=petition)) >= settings.SIGNS_GOAL:
             petition.status = "A"
             petition.save()
