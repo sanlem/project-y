@@ -264,6 +264,7 @@ class TestPetitionSignResource(unittest.TestCase):
     def test_petition_status_updating_if_signs_goal_reached(self):
         PetitionSign.objects.all().delete()
         petition = self.get_petition()
+        self.assertEqual(petition.status, "V")
         users = self.get_users()
         sign = self.set_sign_content()
         for user in users:
