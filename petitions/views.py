@@ -52,13 +52,17 @@ class ImageUploadViewSet(viewsets.ViewSet):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class PetitionSignViewSet(viewsets.ModelViewSet):
+class PetitionSignViewSet(viewsets.mixins.CreateModelMixin,
+                  viewsets.mixins.RetrieveModelMixin,
+                  viewsets.mixins.ListModelMixin,
+                  viewsets.GenericViewSet):
     queryset = PetitionSign.objects.all()
     serializer_class = PetitionSignSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly)
     filter_fields = ('petition',)
 
     def perform_create(self, serializer):
+        print(serializer.data)
         serializer.save(author=self.request.user)
         petition = serializer.validated_data["petition"]
         if len(PetitionSign.objects.filter(petition=petition)) >= settings.SIGNS_GOAL:
