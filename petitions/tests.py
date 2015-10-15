@@ -282,7 +282,7 @@ class TestPetitionSignResource(unittest.TestCase):
     @classmethod
     def set_sign_content(cls):
         petition = cls.get_petition()
-        petition_url = "http://127.0.0.1:8000" + reverse('petition-detail', args=[petition.id])
+        petition_url = "http://testhost" + reverse('petition-detail', args=[petition.id])
         sign = PETITION_SIGN.copy()
         sign.update({"petition": petition_url})
         return sign    
