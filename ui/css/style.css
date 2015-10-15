@@ -78,9 +78,6 @@ header{
       text-decoration:none;
 }
 /* main */
-.cover{
-      background:#eeeeee;
-}
 .create{
       color:#fff;
       text-align:center;
@@ -146,10 +143,11 @@ header{
       text-align:left;
 }
 .popular{
+      padding-top:5px;
       min-height:350px;
 }
 .footer{
-      height:500px;
+      height:560px;
 }
 /* single petition */
 .image{
@@ -242,7 +240,7 @@ header{
 }
 /* aside */
 .tags h4, .popular h4{
-      margin:10px 0 10px 15px;
+      margin:20px 0 10px 15px;
 }
 .popular-tags{
       margin:10px;
@@ -251,6 +249,65 @@ header{
 .tags .tag{
       display:inline-block;
       margin:5px 5px;
+}
+/* popular petition */
+.pop-petition{
+      color:#656565;
+      text-align:left;
+}
+.pop-petition h4{
+      font-size:15px;
+      margin:0;
+      font-weight:bold;
+}
+.inline{
+      display:inline-block;
+}
+.mini-bar{
+      height:60px;
+}
+.mini-title{
+      min-height:60px;
+      padding-top:15px;
+}
+.border{
+      border-bottom:1px solid #eeeeee;
+}
+.pop-petition:hover, .pop-petition:focus, .pop-petition:active{
+      text-decoration:none;
+      color:#656565;
+}
+.footer{
+      padding:20px;
+}
+.footer p{
+      color:#656565;
+}
+.who-we-are h4, .join-us h4, .ask h4{
+      padding-top:10px;
+}
+.join-us .fa-circle:hover{
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.join-us a, .join-us a:hover, .join-us a:focus, .join-us a:active{
+      text-decoration:none;
+}
+.facebook .fa-circle{
+      color:#3b5998;
+}
+.vk .fa-circle{
+      color:#45668e;
+}
+.twitter .fa-circle{
+      color:#55acee;
+}
+.google .fa-circle{
+      color:#dc4e41;
+}
+.ask a, .ask a:hover,.ask a:focus, .ask a:active{
+      color:#656565;
+      display:block;
+      margin:7px 0;
 }
 /* footer (always below) */
 .more-button-block{
@@ -280,31 +337,4 @@ header{
       position:relative;
       margin-top:50px;
       color:#009688;
-}
-/* popular petition */
-.pop-petition{
-      color:#656565;
-      text-align:left;
-}
-.pop-petition h4{
-      font-size:15px;
-      margin:0;
-      font-weight:bold;
-}
-.inline{
-      display:inline-block;
-}
-.mini-bar{
-      height:60px;
-}
-.mini-title{
-      min-height:60px;
-      padding-top:15px;
-}
-.border{
-      border-bottom:1px solid #eeeeee;
-}
-.pop-petition:hover, .pop-petition:focus, .pop-petition:active{
-      text-decoration:none;
-      color:#656565;
 }
