@@ -62,7 +62,6 @@ class PetitionSignViewSet(viewsets.mixins.CreateModelMixin,
     filter_fields = ('petition',)
 
     def perform_create(self, serializer):
-        print(serializer.data)
         serializer.save(author=self.request.user)
         petition = serializer.validated_data["petition"]
         if len(PetitionSign.objects.filter(petition=petition)) >= settings.SIGNS_GOAL:
