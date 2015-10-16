@@ -8,6 +8,7 @@
       <link rel="stylesheet" href="css/search-icon.css">
       <link rel="stylesheet" href="css/progressbar.css">
       <link rel="stylesheet" href="css/responsive.css">
+      <link rel="stylesheet" href="css/registrationform.css">
       <!-- Fonts -->
       <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300' rel='stylesheet' type='text/css'>
       <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
@@ -47,13 +48,58 @@
                         </div>
                   </div>
                   <div class="right-buttons">
-                        <ul class="sign">
-                              <a href="#" class="registration"><li>Реєстрація</li></a>
-                              <a href="#" class="signin"><li>Вхід</li></a>
-                        </ul>
+                        <nav class="main-nav">
+                              <ul class="sign">
+                                    <li><button type="button" class="btn btn-primary btn-lg registration" data-toggle="modal" data-target="#myModal">Реєстрація
+                                    </button></li>
+                                    <li><button type="button" class="btn btn-primary btn-lg signin" data-toggle="modal" data-target="#myModal">Вхід
+                                    </button></li>
+                              </ul>
+                        </nav>
                   </div>
             </div>
       </header>
+      <!-- registration/sign in form -->
+      <div class="modal fade position" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="registration-wrapper">
+
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#registration-form" aria-controls="home" role="tab" data-toggle="tab"><h4>Реєстрація</h4></a></li>
+                        <li role="presentation"><a href="#sign-in-form" aria-controls="profile" role="tab" data-toggle="tab"><h4>Вхід</h4></a></li>
+                  </ul>
+
+                  <!-- Tab panes -->
+                  <div class="tab-content registration-block">
+                        <div role="tabpanel" class="tab-pane active" id="registration-form">
+                              <form class="cd-form floating-labels">
+                        		<fieldset>
+                        			<div class="icon">
+                        				<label class="cd-label" for="cd-name">Прізвище та Ім’я</label>
+                        				<input class="user" type="text" name="cd-name" id="cd-name" maxlength="75">
+                        		    </div>
+
+                        		    <div class="icon">
+                        		    	<label class="cd-label" for="cd-company">Номер студентського квитка або диплому</label>
+                        				<input class="company" type="text" name="cd-company" id="cd-company" maxlength="25">
+                        		    </div>
+
+                        		    <div class="icon">
+                        		    	<label class="cd-label" for="cd-email">Email</label>
+                        				<input class="email" type="email" name="cd-email" id="cd-email" maxlength="50">
+                        		    </div>
+                        		</fieldset>
+                                    <div>
+                  		      	<input type="submit" value="Зареєструватись">
+                  		    </div>
+                              </form>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="sign-in-form">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</div>
+                  </div>
+
+            </div>
+      </div>
+      <!-- the end of the registration/sign in form -->
       <div class="main">
             <div class="create">
                 <div class="wrapper">
@@ -403,5 +449,6 @@
       </div>
       <!-- Latest compiled and minified JavaScript -->
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+      <script src="js/main.js"></script> <!-- Gem jQuery -->
 </body>
 </html>

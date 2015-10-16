@@ -21,6 +21,12 @@ a, a:hover, a:focus, a:active{
       text-decoration:none;
       color:none;
 }
+button:active, button:focus {
+  outline: none !important;
+}
+button::-moz-focus-inner {
+  border: 0 !important;
+}
 /* header */
 header{
       height:90px;
@@ -63,18 +69,27 @@ header{
       float:right;
       line-height:90px;
 }
-.sign a{
+.sign li{
+      list-style:none;
+      display:inline-block;
+}
+.sign button, .sign button:focus, .sign button:active, .sign button:target{
+      box-shadow:none;
       list-style:none;
       font-size:15px;
+      background:none;
+      padding:0;
+      border-color:transparent;
       margin:0 5px;
-      display:inline-block;
       color:#969696;
       -webkit-transition: .3s ease;
       -moz-transition: .3s ease;
       transition: .3s ease;
 }
-.sign a:hover{
+.sign button:hover{
       color:#212121;
+      border-color:transparent;
+      background:none;
       text-decoration:none;
 }
 /* main */
