@@ -1,8 +1,8 @@
 .registration-wrapper{
-      margin:200px auto;
+      margin:50px auto;
       border-radius:5px;
       width:600px;
-      height:550px;
+      height:650px;
       background:#fff;
 }
 .nav-tabs{
@@ -66,6 +66,7 @@
 }
 .cd-form input[type="text"],
 .cd-form input[type="email"],
+.cd-form input[type="password"],
 .cd-form textarea,
 .cd-form select,
 .cd-form legend {
@@ -79,6 +80,7 @@
 }
 .cd-form input[type="text"],
 .cd-form input[type="email"],
+.cd-form input[type="password"],
 .cd-form textarea,
 .cd-form select {
   /* general style for input elements */
@@ -99,7 +101,7 @@
 .cd-form input[type="submit"] {
   /* button style */
   border: none;
-  background: #2c97de;
+  background:#009688;
   border-radius: .25em;
   padding: 16px 20px;
   color: #ffffff;
@@ -130,4 +132,16 @@
 }
 .cd-label{
       margin:10px 0;
+}
+.form__input[required]:focus:invalid {
+  border-color: #cf5340;
+}
+.form__input[required]:valid {
+  border-color: #b4d388;
+}
+.form__input:invalid ~ .form__submit {
+  display: none;
+}
+#sign-in-form{
+      padding-top:60px;
 }

@@ -76,17 +76,20 @@
                         		<fieldset>
                         			<div class="icon">
                         				<label class="cd-label" for="cd-name">Прізвище та Ім’я</label>
-                        				<input class="user" type="text" name="cd-name" id="cd-name" maxlength="75">
+                        				<input class="user form__input" type="text" name="cd-name" id="cd-name" maxlength="75" required="required">
                         		    </div>
 
                         		    <div class="icon">
-                        		    	<label class="cd-label" for="cd-company">Номер студентського квитка або диплому</label>
-                        				<input class="company" type="text" name="cd-company" id="cd-company" maxlength="25">
+                        		    	<label class="cd-label" for="index">Номер студентського квитка або диплому</label>
+                        				<input class="index form__input" type="text" name="index" id="index" maxlength="15" required="required">
                         		    </div>
-
+                                        <div class="icon">
+                        		    	<label class="cd-label" for="cd-email">Пароль (мінімум 6 символів)</label>
+                        				<input type="password" pattern=".{6,}" maxlength="15" required="required" class="form__input">
+                        		    </div>
                         		    <div class="icon">
                         		    	<label class="cd-label" for="cd-email">Email</label>
-                        				<input class="email" type="email" name="cd-email" id="cd-email" maxlength="50">
+                        				<input class="email form__input" type="email" name="cd-email" id="cd-email" maxlength="50" required="required">
                         		    </div>
                         		</fieldset>
                                     <div>
@@ -94,9 +97,24 @@
                   		    </div>
                               </form>
                         </div>
-                        <div role="tabpanel" class="tab-pane" id="sign-in-form">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</div>
+                        <div role="tabpanel" class="tab-pane" id="sign-in-form">
+                              <form class="cd-form floating-labels">
+                        		<fieldset>
+                        		    <div class="icon">
+                        		    	<label class="cd-label" for="index">Номер студентського квитка або диплому</label>
+                        				<input class="index form__input" type="text" name="index" id="index" maxlength="15" required="required">
+                        		    </div>
+                                        <div class="icon">
+                        		    	<label class="cd-label" for="cd-email">Пароль</label>
+                        				<input type="password" pattern=".{6,}" maxlength="15" required="required" class="form__input">
+                        		    </div>
+                        		</fieldset>
+                                    <div>
+                  		      	<input type="submit" value="Вхід">
+                  		    </div>
+                              </form>
+                        </div>
                   </div>
-
             </div>
       </div>
       <!-- the end of the registration/sign in form -->
