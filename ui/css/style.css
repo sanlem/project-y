@@ -100,18 +100,11 @@ header{
 }
 .responsive-menu{
       display:none;
-      float:right;
-      max-width:768px;
-      margin:30px 10px 0 0;
-}
-.responsive-menu i{
-      float:right;
-      color:#969696;
-}
-.dropdown-menu{
-      position:absolute;
-      width:100%;
       float:left;
+      max-width:768px;
+      height:90px;
+      margin:30px 10px 0 0;
+      padding-left:10px;
 }
 /* main */
 .create{
@@ -122,7 +115,7 @@ header{
       background:url('http://i.imgur.com/Puiq9kA.jpg') no-repeat center rgba(0, 106, 80, 0.7);
 }
 .create-wrapper{
-      width:700px;
+      max-width:700px;
       padding:100px;
       margin:0 auto;
 }

@@ -1,0 +1,172 @@
+*,
+*:before,
+*:after {
+  -webkit-transition: all 300ms ease;
+          transition: all 300ms ease;
+}
+.to-close{
+      float:left;
+      width:3rem;
+}
+.to-close div > div {
+  float: left;
+}
+
+.to-close input {
+  display: none;
+}
+
+.to-close label {
+  display: block;
+  cursor:pointer;
+  width: 5rem;
+  height: 3.5rem;
+  position: relative;
+}
+.to-close label span {
+  position: relative;
+  top: 1.5rem;
+}
+.to-close label span, label span:before, label span:after {
+  display: block;
+  background: #CFD8DC;
+  width: 3rem;
+  height: 0.2rem;
+  border-radius: 0.25rem;
+}
+.to-close label span:before, label span:after {
+  content: '';
+  position: absolute;
+}
+.to-close label span:before {
+  bottom: 1rem;
+}
+.to-close label span:after {
+  top: 1rem;
+}
+.to-close .left label span:before, .top label span:before, .bottom label span:before {
+  -webkit-transform-origin: top left;
+      -ms-transform-origin: top left;
+          transform-origin: top left;
+}
+.to-close .left label span:after, .top label span:after, .bottom label span:after {
+  -webkit-transform-origin: bottom left;
+      -ms-transform-origin: bottom left;
+          transform-origin: bottom left;
+}
+.to-close .right label span:before {
+  -webkit-transform-origin: top right;
+      -ms-transform-origin: top right;
+          transform-origin: top right;
+  right: 0;
+}
+.to-close .right label span:after {
+  -webkit-transform-origin: bottom right;
+      -ms-transform-origin: bottom right;
+          transform-origin: bottom right;
+  right: 0;
+}
+.left :checked ~ label span:before, .top :checked ~ label span:before, .bottom :checked ~ label span:before {
+  -webkit-transform: rotate(-40deg);
+      -ms-transform: rotate(-40deg);
+          transform: rotate(-40deg);
+}
+.left :checked ~ label span:after, .top :checked ~ label span:after, .bottom :checked ~ label span:after {
+  -webkit-transform: rotate(40deg);
+      -ms-transform: rotate(40deg);
+          transform: rotate(40deg);
+}
+.right :checked ~ label span:before {
+  -webkit-transform: rotate(40deg);
+      -ms-transform: rotate(40deg);
+          transform: rotate(40deg);
+}
+.right :checked ~ label span:after {
+  -webkit-transform: rotate(-40deg);
+      -ms-transform: rotate(-40deg);
+          transform: rotate(-40deg);
+}
+.top :checked ~ label span {
+  -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+.bottom :checked ~ label span {
+  -webkit-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+.x :checked ~ label span {
+  width: 0;
+}
+.x :checked ~ label span:before {
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+  bottom: 0;
+}
+.x :checked ~ label span:after {
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  top: 0;
+}
+.x1 :checked ~ label span {
+  background: none;
+}
+.x1 :checked ~ label span:before {
+  -webkit-animation: x1Before 500ms forwards;
+          animation: x1Before 500ms forwards;
+}
+.x1 :checked ~ label span:after {
+  -webkit-animation: x1After 500ms forwards;
+          animation: x1After 500ms forwards;
+}
+@-webkit-keyframes x1Before {
+  50% {
+    bottom: 0;
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    bottom: 0;
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+  }
+}
+@keyframes x1Before {
+  50% {
+    bottom: 0;
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    bottom: 0;
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+  }
+}
+@-webkit-keyframes x1After {
+  50% {
+    top: 0;
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    top: 0;
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+  }
+}
+@keyframes x1After {
+  50% {
+    top: 0;
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    top: 0;
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+  }
+}

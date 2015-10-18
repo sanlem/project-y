@@ -7,7 +7,7 @@
       }
 }
 @media (max-width:768px){
-      .menu, .sign, .search{
+      .left-buttons, .right-buttons{
             display:none;
       }
       .responsive-menu{
