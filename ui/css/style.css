@@ -35,12 +35,14 @@ header{
 .logo{
       float:left;
       line-height:90px;
+      margin-left:10px;
       font-size:20px;
       color:#009688;
       font-family: 'Source Sans Pro', sans-serif;
       font-weight:bold;
 }
 .menu{
+      display:block;
       float:left;
       margin-left:15px;
       line-height:90px;
@@ -66,6 +68,8 @@ header{
       float:left;
 }
 .sign{
+      display:block;
+      margin-right:10px;
       float:right;
       line-height:90px;
 }
@@ -73,24 +77,41 @@ header{
       list-style:none;
       display:inline-block;
 }
-.sign button, .sign button:focus, .sign button:active, .sign button:target{
-      box-shadow:none;
+.sign button,
+.sign button:focus,
+.sign button:active{
+      box-shadow:none !important;
       list-style:none;
       font-size:15px;
-      background:none;
+      background:transparent !important;
       padding:0;
-      border-color:transparent;
+      border-color:transparent !important;
       margin:0 5px;
-      color:#969696;
+      color:#969696 !important;
       -webkit-transition: .3s ease;
       -moz-transition: .3s ease;
       transition: .3s ease;
 }
 .sign button:hover{
-      color:#212121;
+      color:#212121 !important;
       border-color:transparent;
       background:none;
       text-decoration:none;
+}
+.responsive-menu{
+      display:none;
+      float:right;
+      max-width:768px;
+      margin:30px 10px 0 0;
+}
+.responsive-menu i{
+      float:right;
+      color:#969696;
+}
+.dropdown-menu{
+      position:absolute;
+      width:100%;
+      float:left;
 }
 /* main */
 .create{

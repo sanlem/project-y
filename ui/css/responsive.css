@@ -6,3 +6,11 @@
             width:100%;
       }
 }
+@media (max-width:768px){
+      .menu, .sign, .search{
+            display:none;
+      }
+      .responsive-menu{
+            display:block;
+      }
+}

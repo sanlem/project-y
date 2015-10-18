@@ -12,9 +12,11 @@
       width:50%;
       text-align:center;
       color:#969696;
+      outline:none;
 }
 .nav-tabs a, .nav-tabs a:hover{
       color:#969696;
+      outline:none;
 }
 .nav-tabs li.active a,
 .nav-tabs li.active a:focus,
@@ -59,7 +61,6 @@
   display: block;
 }
 .cd-form input, .cd-form textarea, .cd-form select, .cd-form label {
-  font-family: "Open Sans", sans-serif;
   font-size: 1.6rem;
   color: #2b3e51;
 }
@@ -83,28 +84,39 @@
 .cd-form textarea,
 .cd-form select {
   /* general style for input elements */
-  padding:15px;
-  border: 1px solid #cfd9db;
-  background-color: #ffffff;
+  border:0;
+  box-shadow: none;
+  padding:10px;
+  opacity:0.5;
+  background-color: #e8e8e8;
   border-radius: .25em;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.08);
+  -webkit-transition: .3s ease;
+ -moz-transition: .3s ease;
+ transition: .3s ease;
 }
 .cd-form input[type="text"]:focus,
 .cd-form input[type="email"]:focus,
+.cd-form input[type="password"]:focus,
 .cd-form textarea:focus,
 .cd-form select:focus {
+  opacity:1;
+  background:#fafafa;
+  border-radius:0;
   outline: none;
-  border-color: #2c97de;
-  box-shadow: 0 0 5px rgba(44, 151, 222, 0.2);
+  border-bottom:1px solid  #2c97de;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 .cd-form input[type="submit"] {
   /* button style */
   border: none;
   margin-bottom:30px;
-  background:#009688;
+  background:#fff;
+  border:2px solid #009688;
   border-radius: .25em;
-  padding: 16px 20px;
-  color: #ffffff;
+  padding: 5px 20px;
+  color: #009688;
   font-weight: bold;
   float: right;
   cursor: pointer;
@@ -115,22 +127,15 @@
   -ms-appearance: none;
   -o-appearance: none;
   appearance: none;
+  -webkit-transition: .3s ease;
+ -moz-transition: .3s ease;
+ transition: .3s ease;
 }
-.no-touch .cd-form input[type="submit"]:hover {
-  background: #42a2e1;
+.cd-form input[type="submit"]:hover {
+  background: #009688;
+  color:#fff;
 }
-.cd-form input[type="submit"]:focus {
-  outline: none;
-  background: #2b3e51;
-}
-.cd-form input[type="submit"]:active {
-  -webkit-transform: scale(0.9);
-  -moz-transform: scale(0.9);
-  -ms-transform: scale(0.9);
-  -o-transform: scale(0.9);
-  transform: scale(0.9);
-}
-.cd-label{
+d-label{
       margin:10px 0;
 }
 .form__input[required]:focus:invalid {

@@ -9,6 +9,7 @@
       <link rel="stylesheet" href="css/progressbar.css">
       <link rel="stylesheet" href="css/responsive.css">
       <link rel="stylesheet" href="css/registrationform.css">
+      <link rel="stylesheet" href="css/responsive-menu.css">
       <!-- Fonts -->
       <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300' rel='stylesheet' type='text/css'>
       <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
@@ -19,14 +20,15 @@
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <script src="js/modernizr.js"></script> <!-- Modernizr -->
 
 </head>
 <body>
-      <header>
+      <header class="cd-header">
             <div id="anchor"></div>
             <div class="wrapper">
                   <div class="left-buttons">
-                        <a class="logo" href="#">#kpi-petitions</a>
+                        <a class="logo cd-logo" href="#">#kpi-petitions</a>
                         <ul class="menu">
                               <a href="#" class="active">
                                     <li>Активні петиції</li>
@@ -56,6 +58,12 @@
                                     </button></li>
                               </ul>
                         </nav>
+                  </div>
+                  <!-- responsive menu icon -->
+                  <div class="responsive-menu">
+                        <a class="cd-primary-nav-trigger" href="#0">
+            			<span class="cd-menu-text">Menu</span><span class="cd-menu-icon"></span>
+            		</a> <!-- cd-primary-nav-trigger -->
                   </div>
             </div>
       </header>
@@ -462,6 +470,7 @@
       </div>
       <!-- Latest compiled and minified JavaScript -->
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+      <script src="js/jquery-2.1.1.js"></script>
       <script src="js/main.js"></script> <!-- Gem jQuery -->
 </body>
 </html>
