@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.core.files.storage import default_storage
 from petitions.utils import generate_unique_upload_filename
 from rest_framework import serializers
-from petitions.models import Petition, Media, PetitionSign
+from petitions.models import Petition, Media, PetitionSign, Tag
 from rest_framework.fields import empty
 from rest_framework.reverse import reverse
 
@@ -54,19 +54,33 @@ class MediaSerializer(serializers.ModelSerializer):
         fields = ('id', 'mediaUrl', 'type')
 
 
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ('name',)
+
+
 class PetitionSerializerDetail(PetitionSerializer):
     author = UserSerializer(read_only=True)
     media = MediaSerializer(many=True)
+    tags = TagSerializer(many=True, required=False)
     class Meta(PetitionSerializer.Meta):
-        fields = PetitionSerializer.Meta.fields + ('author', 'media')
+        fields = PetitionSerializer.Meta.fields + ('author', 'media', 'tags',)
 
     def create(self, validated_data):
         media_data = validated_data.pop('media')
+        tags_data = validated_data.pop('tags')
         petition = Petition.objects.create(**validated_data)
         for media_item in media_data:
             if 'id' in media_item:
                 raise serializers.ValidationError("Don't add new media with id field")
             Media.objects.create(petition=petition, **media_item)
+        
+        for tag in tags_data:
+            current_tag, created = Tag.objects.get_or_create(**tag)
+            petition.tags.add(current_tag)
+        petition.save()
+
         return petition
 
     def update(self, instance, validated_data):
@@ -95,6 +109,23 @@ class PetitionSerializerDetail(PetitionSerializer):
             deleted_items = existing_media_ids
             for deleted_item_id in deleted_items:
                 Media.objects.filter(pk=deleted_item_id).delete()
+
+        if 'tags' in validated_data:
+            tags_data = validated_data.pop('tags')
+            existing_tags = set(tag.name for tag in instance.tags.all())
+            updated_tags = set(tag["name"] for tag in tags_data)
+
+            new_tags = updated_tags.difference(existing_tags)
+            print(new_tags)
+            for tag in new_tags:
+                new, created = Tag.objects.get_or_create(name=tag)
+                instance.tags.add(new)
+
+            keeped_tags = existing_tags.intersection(updated_tags)
+            tags_to_delete = existing_tags.difference(keeped_tags)
+            for tag in tags_to_delete:
+                instance.tags.remove(tag)
+            instance.save()
 
         return super().update(instance, validated_data)
 
