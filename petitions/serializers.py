@@ -78,6 +78,12 @@ class PetitionSerializerDetail(PetitionSerializer):
             if 'id' in media_item:
                 raise serializers.ValidationError("Don't add new media with id field")
             Media.objects.create(petition=petition, **media_item)
+
+        for tag_item in tags_data:
+            tag, created = Tag.objects.get_or_create(**tag_item)
+            petition.tags.add(tag)
+        petition.save()
+
         return petition
 
     def update(self, instance, validated_data):
