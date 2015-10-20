@@ -1,7 +1,7 @@
 .registration-wrapper{
       margin:50px auto;
       border-radius:5px;
-      width:600px;
+      max-width:600px;
       background:#fff;
 }
 .nav-tabs{
@@ -26,6 +26,13 @@
       border:none !important;
       border-bottom:2px solid #fff !important;
       outline:0;
+}
+.authentification{
+      max-width:600px;
+}
+.authentification .icons{
+      width:170px;
+      margin:30px auto;
 }
 /* registration */
 .cd-form {

@@ -97,6 +97,34 @@
                         		    	<label class="cd-label" for="cd-email">Пароль (мінімум 6 символів)</label>
                         				<input type="password" pattern=".{6,}" maxlength="15" required="required" class="form__input">
                         		    </div>
+                                        <div class="authentification">
+                                              <div class="icons">
+                                                    <a href="#" class="facebook">
+                                                          <span class="fa-stack fa-lg">
+                                                                <i class="fa fa-circle fa-stack-2x"></i>
+                                                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                                          </span>
+                                                    </a>
+                                                    <a href="#" class="vk">
+                                                          <span class="fa-stack fa-lg">
+                                                                <i class="fa fa-circle fa-stack-2x"></i>
+                                                                <i class="fa fa-vk fa-stack-1x fa-inverse"></i>
+                                                          </span>
+                                                    </a>
+                                                    <a href="#" class="twitter">
+                                                          <span class="fa-stack fa-lg">
+                                                                <i class="fa fa-circle fa-stack-2x"></i>
+                                                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                                          </span>
+                                                    </a>
+                                                    <a href="#" class="google">
+                                                          <span class="fa-stack fa-lg">
+                                                                <i class="fa fa-circle fa-stack-2x"></i>
+                                                                <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                                                          </span>
+                                                    </a>
+                                              </div>
+                                        </div>
                         		</fieldset>
                                     <div>
                   		      	<input type="submit" value="Зареєструватись">
@@ -114,6 +142,34 @@
                         		    	<label class="cd-label" for="cd-email">Пароль</label>
                         				<input type="password" pattern=".{6,}" maxlength="15" required="required" class="form__input">
                         		    </div>
+                                        <div class="authentification">
+                                              <div class="icons">
+                                                    <a href="#" class="facebook">
+                                                          <span class="fa-stack fa-lg">
+                                                                <i class="fa fa-circle fa-stack-2x"></i>
+                                                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                                          </span>
+                                                    </a>
+                                                    <a href="#" class="vk">
+                                                          <span class="fa-stack fa-lg">
+                                                                <i class="fa fa-circle fa-stack-2x"></i>
+                                                                <i class="fa fa-vk fa-stack-1x fa-inverse"></i>
+                                                          </span>
+                                                    </a>
+                                                    <a href="#" class="twitter">
+                                                          <span class="fa-stack fa-lg">
+                                                                <i class="fa fa-circle fa-stack-2x"></i>
+                                                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                                          </span>
+                                                    </a>
+                                                    <a href="#" class="google">
+                                                          <span class="fa-stack fa-lg">
+                                                                <i class="fa fa-circle fa-stack-2x"></i>
+                                                                <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                                                          </span>
+                                                    </a>
+                                              </div>
+                                        </div>
                         		</fieldset>
                                     <div>
                   		      	<input type="submit" value="Вхід">
@@ -473,5 +529,13 @@
       </div>
       <!-- Latest compiled and minified JavaScript -->
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+      <script>
+      $('.responsive-menu').on('click', function(event){
+  event.preventDefault();
+  $('.dropdown').slideToggle('slow', function(event){
+    if($(this).is(':visible')){
+  });
+});
+</script>
 </body>
 </html>

@@ -229,12 +229,14 @@ header{
       padding-bottom:15px;
       border-bottom:1px solid #eeeeee;
 }
-.tag{
+.tag, .tag:focus, .tag:active{
       padding:4px 10px;
       background:#eeeeee;
+      text-decoration:none;
       border-radius:12px;
       font-size:13px;
       color:#959595;
+      outline: 0;
 }
 .petition-buttons, .petition-buttons a{
       font-size:13px;
@@ -258,8 +260,9 @@ header{
       -moz-transition: .3s ease;
       transition: .3s ease;
 }
-.btns a:hover{
+.btns a:hover, .btns a:focus, .btns a:active{
       opacity:1;
+      outline:0;
       color:#009688;
       text-decoration:none;
 }
