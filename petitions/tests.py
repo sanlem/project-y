@@ -169,7 +169,27 @@ class TestPetitionsResource(unittest.TestCase):
         response_data = json.loads(response.content.decode())
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response_data["tags"][0]["name"], "tag1")
-        self.assertEqual(response_data["tags"][1]["name"], "tag2")   
+        self.assertEqual(response_data["tags"][1]["name"], "tag2")
+
+    def change_tags(self):
+        self.client.force_authenticate(self.get_user())
+        petition = PETITION.copy()
+        petition.update({"media": []})
+        petition.update({"tags": [{"name": "tag1"}, {"name": "tag2"}]})
+        response = self.client.post(reverse('petition-list'), data=petition, format="json")
+        response_data = json.loads(response.content.decode())
+
+        petition.update({
+            "url": response_data["url"],
+            "tags": [{"name": "tag2"}, {"name": "tag3"}, {"name": "tag4"}]
+        })
+        response = self.client.put(response_data["url"], data=petition, format="json")
+        response_data = json.loads(response.content.decode())
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response_data["tags"]), 3)
+        self.assertEqual(response_data["tags"][0]["name"], "tag2")
+        self.assertEqual(response_data["tags"][1]["name"], "tag3")
+        self.assertEqual(response_data["tags"][2]["name"], "tag4")
 
     def test_remove_petition(self):
         self.client.force_authenticate(self.get_user())

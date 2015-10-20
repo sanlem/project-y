@@ -113,7 +113,23 @@ class PetitionSerializerDetail(PetitionSerializer):
             for deleted_item_id in deleted_items:
                 Media.objects.filter(pk=deleted_item_id).delete()
         
-        tags_data = validated_data.pop('tags')
+        if 'tags' in validated_data:
+            tags_data = validated_data.pop('tags')
+            updated_tags = set(obj['name'] for obj in tags_data)
+            existing_tags = set(obj.name for obj in instance.tags.all())
+
+            keeped_tags = existing_tags.intersection(updated_tags)
+            deleted_tags = existing_tags.difference(keeped_tags)
+            new_tags = updated_tags.difference(existing_tags)
+            for tag_name in new_tags:
+                tag, created = Tag.objects.get_or_create(tag_name)
+                instance.tags.add(tag)
+
+            for tag_name in deleted_tags:
+                tag = Tag.objects.get(tag_name)
+                instance.tags.remove(tag)
+
+            instance.save()
 
         return super().update(instance, validated_data)
 
