@@ -53,6 +53,7 @@ class TestPetitionsResource(unittest.TestCase):
         self.client.logout()
         petition = PETITION.copy()
         petition.update({"media": []})
+        petition.update({"tags": []})
         response = self.client.post(reverse('petition-list'), data=petition, format="json")
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
@@ -64,6 +65,7 @@ class TestPetitionsResource(unittest.TestCase):
         self.client.force_authenticate(self.get_user())
         petition = PETITION.copy()
         petition.update({"media": [{"mediaUrl": "http://example.com/image.jpg", "type": "image"}]})
+        petition.update({"tags": []})
 
         count_before_post = len(Media.objects.all())
         response = self.client.post(reverse('petition-list'), data=petition, format="json")
@@ -78,6 +80,7 @@ class TestPetitionsResource(unittest.TestCase):
         self.client.force_authenticate(self.get_user())
         petition = PETITION.copy()
         petition.update({"media": [{"mediaUrl": "http://example.com/image.jpg", "type": "image"}]})
+        petition.update({"tags": []})
 
         response = self.client.post(reverse('petition-list'), data=petition, format="json")
         response_data = json.loads(response.content.decode())
@@ -99,6 +102,7 @@ class TestPetitionsResource(unittest.TestCase):
         self.client.force_authenticate(self.get_user())
         petition = PETITION.copy()
         petition.update({"media": []})
+        petition.update({"tags": []})
 
         response = self.client.post(reverse('petition-list'), data=petition, format="json")
         response_data = json.loads(response.content.decode())
@@ -118,6 +122,7 @@ class TestPetitionsResource(unittest.TestCase):
         self.client.force_authenticate(self.get_user())
         petition = PETITION.copy()
         petition.update({"media": []})
+        petition.update({"tags": []})
 
         response = self.client.post(reverse('petition-list'), data=petition, format="json")
         response_data = json.loads(response.content.decode())
@@ -138,6 +143,7 @@ class TestPetitionsResource(unittest.TestCase):
         self.client.force_authenticate(self.get_user())
         petition = PETITION.copy()
         petition.update({"media": [{"mediaUrl": "http://example.com/image.jpg", "type": "image"}]})
+        petition.update({"tags": []})
 
         response = self.client.post(reverse('petition-list'), data=petition, format="json")
         response_data = json.loads(response.content.decode())
@@ -157,7 +163,8 @@ class TestPetitionsResource(unittest.TestCase):
         self.client.force_authenticate(self.get_user())
         petition = PETITION.copy()
         petition.update({"media": [{"mediaUrl": "http://example.com/image.jpg", "type": "image"}]})
-
+        petition.update({"tags": []})
+        
         response = self.client.post(reverse('petition-list'), data=petition, format="json")
         response_data = json.loads(response.content.decode())
 

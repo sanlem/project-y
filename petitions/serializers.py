@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.core.files.storage import default_storage
 from petitions.utils import generate_unique_upload_filename
 from rest_framework import serializers
-from petitions.models import Petition, Media, PetitionSign
+from petitions.models import Petition, Media, PetitionSign, Tag
 from rest_framework.fields import empty
 from rest_framework.reverse import reverse
 
@@ -18,12 +18,18 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'username')
 
 
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+
+
 class PetitionSignSerializer(serializers.HyperlinkedModelSerializer):
     author = serializers.ReadOnlyField(source='author.username')
     #petition = serializers.ReadOnlyField(source='petiton.id')
     class Meta:
         model = PetitionSign
         fields = ['petition', 'comment', 'anonymous', 'author']
+
 
 class PetitionSerializer(serializers.HyperlinkedModelSerializer):
     signs = serializers.SerializerMethodField()
@@ -57,11 +63,16 @@ class MediaSerializer(serializers.ModelSerializer):
 class PetitionSerializerDetail(PetitionSerializer):
     author = UserSerializer(read_only=True)
     media = MediaSerializer(many=True)
+    tags = TagSerializer(many=True)
+
     class Meta(PetitionSerializer.Meta):
-        fields = PetitionSerializer.Meta.fields + ('author', 'media')
+        fields = PetitionSerializer.Meta.fields + ('author', 'media', 'tags')
 
     def create(self, validated_data):
         media_data = validated_data.pop('media')
+
+        tags_data = validated_data.pop('tags')
+
         petition = Petition.objects.create(**validated_data)
         for media_item in media_data:
             if 'id' in media_item:
@@ -95,6 +106,8 @@ class PetitionSerializerDetail(PetitionSerializer):
             deleted_items = existing_media_ids
             for deleted_item_id in deleted_items:
                 Media.objects.filter(pk=deleted_item_id).delete()
+        
+        tags_data = validated_data.pop('tags')
 
         return super().update(instance, validated_data)
 
