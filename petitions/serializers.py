@@ -5,9 +5,10 @@ from django.contrib.auth.models import User
 from django.core.files.storage import default_storage
 from petitions.utils import generate_unique_upload_filename
 from rest_framework import serializers
-from petitions.models import Petition, Media, PetitionSign
+from petitions.models import Petition, Media, PetitionSign, Tag
 from rest_framework.fields import empty
 from rest_framework.reverse import reverse
+from django.core.exceptions import ObjectDoesNotExist
 
 
 IMAGES_UPLOAD_DIRECTORY = 'uploadedImages'
@@ -18,12 +19,18 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'username')
 
 
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+
+
 class PetitionSignSerializer(serializers.HyperlinkedModelSerializer):
     author = serializers.ReadOnlyField(source='author.username')
     #petition = serializers.ReadOnlyField(source='petiton.id')
     class Meta:
         model = PetitionSign
         fields = ['petition', 'comment', 'anonymous', 'author']
+
 
 class PetitionSerializer(serializers.HyperlinkedModelSerializer):
     signs = serializers.SerializerMethodField()
@@ -54,19 +61,50 @@ class MediaSerializer(serializers.ModelSerializer):
         fields = ('id', 'mediaUrl', 'type')
 
 
+class TagSlugRelatedField(serializers.SlugRelatedField):
+    """ 
+        Default field searches for every instance
+        in existing queryset, but we need to create object
+        if it doesn't exists in queryset, not to throw error.
+    """
+    def to_internal_value(self, data):
+        try:
+            return self.get_queryset().get(**{self.slug_field: data})
+        except ObjectDoesNotExist:
+            new_tag = Tag.objects.create(**{self.slug_field: data})
+            return new_tag
+        except (TypeError, ValueError):
+            self.fail('invalid')
+
+
 class PetitionSerializerDetail(PetitionSerializer):
     author = UserSerializer(read_only=True)
     media = MediaSerializer(many=True)
+    tags = TagSlugRelatedField(
+        many=True, 
+        slug_field='name',
+        queryset=Tag.objects.all()
+    )
+
     class Meta(PetitionSerializer.Meta):
-        fields = PetitionSerializer.Meta.fields + ('author', 'media')
+        fields = PetitionSerializer.Meta.fields + ('author', 'media', 'tags')
 
     def create(self, validated_data):
         media_data = validated_data.pop('media')
+
+        tags_data = validated_data.pop('tags')
+
         petition = Petition.objects.create(**validated_data)
         for media_item in media_data:
             if 'id' in media_item:
                 raise serializers.ValidationError("Don't add new media with id field")
             Media.objects.create(petition=petition, **media_item)
+
+        for tag_item in tags_data:
+            tag = Tag.objects.get(name=tag_item)
+            petition.tags.add(tag)
+        petition.save()
+
         return petition
 
     def update(self, instance, validated_data):
@@ -95,6 +133,24 @@ class PetitionSerializerDetail(PetitionSerializer):
             deleted_items = existing_media_ids
             for deleted_item_id in deleted_items:
                 Media.objects.filter(pk=deleted_item_id).delete()
+        
+        if 'tags' in validated_data:
+            tags_data = validated_data.pop('tags')
+            updated_tags = set(tags_data)
+            existing_tags = set(obj.name for obj in instance.tags.all())
+
+            keeped_tags = existing_tags.intersection(updated_tags)
+            deleted_tags = existing_tags.difference(keeped_tags)
+            new_tags = updated_tags.difference(existing_tags)
+            for tag_name in new_tags:
+                tag = Tag.objects.get(name=tag_name)
+                instance.tags.add(tag)
+
+            for tag_name in deleted_tags:
+                tag = Tag.objects.get(name=tag_name)
+                instance.tags.remove(tag)
+
+            instance.save()
 
         return super().update(instance, validated_data)
 
