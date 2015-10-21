@@ -168,7 +168,7 @@ class TestPetitionsResource(unittest.TestCase):
 
         response = self.client.post(reverse('petition-list'), data=petition, format="json")
         response_data = json.loads(response.content.decode())
-        #self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response_data["tags"][0], "tag1")
         self.assertEqual(response_data["tags"][1], "tag2")
 
