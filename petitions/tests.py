@@ -3,7 +3,7 @@ import logging
 import unittest
 import sys
 from django.contrib.auth import get_user_model
-from petitions.models import Petition, Media, PetitionSign
+from petitions.models import Petition, Media, PetitionSign, Tag
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APIClient
@@ -216,6 +216,23 @@ class TestPetitionsResource(unittest.TestCase):
             cls._user = get_user_model()(username="Luke")
             cls._user.save()
         return cls._user
+
+
+class TestTagResource(unittest.TestCase):
+    def setUp(self):
+        self.client = APIClient()
+
+    def test_tags_list(self):
+        Tag.objects.all().delete()
+        tag_name = 'tag'
+        for i in range(5):
+            name = tag_name + str(i)
+            tag = Tag.objects.create(name=name)
+        response = self.client.get(reverse('tag-list'))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        response_data = json.loads(response.content.decode())
+        self.assertTrue(len(response_data), 5)     
 
 
 class TestUserResource(unittest.TestCase):
