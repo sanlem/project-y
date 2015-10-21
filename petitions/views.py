@@ -1,13 +1,13 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 
-from petitions.serializers import UserSerializerDetail, PetitionSerializerDetail, ImageUploadSerializer, PetitionSignSerializer
-from petitions.models import Petition, PetitionSign
+from petitions.serializers import UserSerializerDetail, PetitionSerializerDetail, ImageUploadSerializer, PetitionSignSerializer, TagSerializer
+from petitions.models import Petition, PetitionSign, Tag
 from rest_framework import viewsets, permissions, status, filters
 from petitions.permissions import IsAuthorOrReadOnly
 from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from allauth.socialaccount.providers.vk.views import VKOAuth2Adapter
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from rest_auth.registration.views import SocialLoginView
@@ -27,6 +27,12 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     def me(self, request):
         serializer = UserSerializerDetail(request.user, context={'request': request})
         return Response(serializer.data)
+
+
+class TagsList(viewsets.GenericViewSet, viewsets.mixins.ListModelMixin,):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    permission_classes = ()
 
 
 class PetitionViewSet(viewsets.ModelViewSet):
