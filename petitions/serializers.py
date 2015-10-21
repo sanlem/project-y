@@ -8,6 +8,7 @@ from rest_framework import serializers
 from petitions.models import Petition, Media, PetitionSign, Tag
 from rest_framework.fields import empty
 from rest_framework.reverse import reverse
+from django.core.exceptions import ObjectDoesNotExist
 
 
 IMAGES_UPLOAD_DIRECTORY = 'uploadedImages'
@@ -60,10 +61,30 @@ class MediaSerializer(serializers.ModelSerializer):
         fields = ('id', 'mediaUrl', 'type')
 
 
+class TagSlugRelatedField(serializers.SlugRelatedField):
+    """ 
+        Default field searches for every instance
+        in existing queryset, but we need to create object
+        if it doesn't exists in queryset, not to throw error.
+    """
+    def to_internal_value(self, data):
+        try:
+            return self.get_queryset().get(**{self.slug_field: data})
+        except ObjectDoesNotExist:
+            new_tag = Tag.objects.create(**{self.slug_field: data})
+            return new_tag
+        except (TypeError, ValueError):
+            self.fail('invalid')
+
+
 class PetitionSerializerDetail(PetitionSerializer):
     author = UserSerializer(read_only=True)
     media = MediaSerializer(many=True)
-    tags = TagSerializer(many=True)
+    tags = TagSlugRelatedField(
+        many=True, 
+        slug_field='name',
+        queryset=Tag.objects.all()
+    )
 
     class Meta(PetitionSerializer.Meta):
         fields = PetitionSerializer.Meta.fields + ('author', 'media', 'tags')
@@ -80,7 +101,7 @@ class PetitionSerializerDetail(PetitionSerializer):
             Media.objects.create(petition=petition, **media_item)
 
         for tag_item in tags_data:
-            tag, created = Tag.objects.get_or_create(**tag_item)
+            tag = Tag.objects.get(name=tag_item)
             petition.tags.add(tag)
         petition.save()
 
@@ -115,18 +136,18 @@ class PetitionSerializerDetail(PetitionSerializer):
         
         if 'tags' in validated_data:
             tags_data = validated_data.pop('tags')
-            updated_tags = set(obj['name'] for obj in tags_data)
+            updated_tags = set(tags_data)
             existing_tags = set(obj.name for obj in instance.tags.all())
 
             keeped_tags = existing_tags.intersection(updated_tags)
             deleted_tags = existing_tags.difference(keeped_tags)
             new_tags = updated_tags.difference(existing_tags)
             for tag_name in new_tags:
-                tag, created = Tag.objects.get_or_create(tag_name)
+                tag = Tag.objects.get(name=tag_name)
                 instance.tags.add(tag)
 
             for tag_name in deleted_tags:
-                tag = Tag.objects.get(tag_name)
+                tag = Tag.objects.get(name=tag_name)
                 instance.tags.remove(tag)
 
             instance.save()
