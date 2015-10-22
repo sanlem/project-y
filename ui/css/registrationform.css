@@ -25,6 +25,7 @@
       background-color: #fff !important;
       border:none !important;
       border-bottom:2px solid #fff !important;
+      box-shadow:none !important;
       outline:0;
 }
 .authentification{

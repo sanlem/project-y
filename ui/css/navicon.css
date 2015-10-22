@@ -25,7 +25,7 @@
 }
 .to-close label span {
   position: relative;
-  top: 1.5rem;
+  top: 0.4rem;
 }
 .to-close label span, label span:before, label span:after {
   display: block;

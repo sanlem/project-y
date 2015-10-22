@@ -11,6 +11,7 @@
       <link rel="stylesheet" href="css/registrationform.css">
       <link rel="stylesheet" href="css/responsive-menu.css">
       <link rel="stylesheet" href="css/navicon.css">
+      <link rel="stylesheet" href="css/eric-meyer-reset.css">
       <!-- Fonts -->
       <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300' rel='stylesheet' type='text/css'>
       <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
@@ -24,6 +25,7 @@
 
 </head>
 <body>
+      <span id="anchor"></span>
       <header>
             <div class="wrapper">
                   <div class="left-buttons">
@@ -367,7 +369,7 @@
                                     </div>
                               </div>
                         </div>
-                        <div class="aside"></div>
+                        <div class="aside">
                               <div class="as tags">
                                     <h4>Популярні теги</h4>
                                     <div class="popular-tags">
@@ -520,6 +522,7 @@
                               </div>
                         </div>
                   </div>
+            </div>
       </div>
       <div class="more-button-block">
             <div class="wrapper">
@@ -527,15 +530,90 @@
                   <div class="up-block"><a href="#anchor" class="up"><i class="fa fa-chevron-up fa-2x"></i></a></div>
             </div>
       </div>
+      <footer>
+            <div class="first-line">
+                  <div class="row">
+                        <div class="col-xs-6 col-md-4 box box-1">
+                              <div class="about-project">
+                                    <h4>Про проект</h4>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                              </div>
+                              <div class="who-we-are">
+                                    <h4>Хто ми?</h4>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                              </div>
+                              <div class="join-us">
+                                    <h4>Приєднуйся до нас</h4>
+                                    <div class="icons">
+                                          <a href="#" class="facebook">
+                                                <span class="fa-stack fa-lg">
+                                                      <i class="fa fa-circle fa-stack-2x"></i>
+                                                      <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                          </a>
+                                          <a href="#" class="vk">
+                                                <span class="fa-stack fa-lg">
+                                                      <i class="fa fa-circle fa-stack-2x"></i>
+                                                      <i class="fa fa-vk fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                          </a>
+                                          <a href="#" class="twitter">
+                                                <span class="fa-stack fa-lg">
+                                                      <i class="fa fa-circle fa-stack-2x"></i>
+                                                      <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                          </a>
+                                          <a href="#" class="google">
+                                                <span class="fa-stack fa-lg">
+                                                      <i class="fa fa-circle fa-stack-2x"></i>
+                                                      <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                          </a>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="col-xs-6 col-md-4 box">
+                              <div class="tags">
+                                    <h4>Популярні теги</h4>
+                                    <div class="popular-tags">
+                                          <a href="#" class="tag">Тег1</a>
+                                          <a href="#" class="tag">Тег2</a>
+                                          <a href="#" class="tag">Довгий тег</a>
+                                          <a href="#" class="tag">Тег4</a>
+                                          <a href="#" class="tag">Трохи довший тег</a>
+                                          <a href="#" class="tag">Тег2</a>
+                                          <a href="#" class="tag">Тег3</a>
+                                          <a href="#" class="tag">Довгий тег</a>
+                                          <a href="#" class="tag">Тег1</a>
+                                          <a href="#" class="tag">Тег2</a>
+                                          <a href="#" class="tag">Трохи довший тег</a>
+                                          <a href="#" class="tag">Тег4</a>
+                                          <a href="#" class="tag">Тег2</a>
+                                          <a href="#" class="tag">Трохи довший тег</a>
+                                          <a href="#" class="tag">Тег4</a>
+                                          <a href="#" class="tag">Тег1</a>
+                                          <a href="#" class="tag">Тег2</a>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="col-xs-6 col-md-4 box">
+                              <div class="ask">
+                                    <h4>Досі маєте питання?</h4>
+                                    <div class="questions">
+                                          <a href="#" class="question">Поширені запитання</a>
+                                          <a href="#" class="question">API для розробників</a>
+                                          <a href="#" class="question">GitHub репозиторій</a>
+                                          <a href="#" class="question">Знайшли помилку?</a>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+            <div class="second-line">
+                  <p>© 2015 KPI-petitions</p>
+            </div>
+      </footer>
       <!-- Latest compiled and minified JavaScript -->
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-      <script>
-      $('.responsive-menu').on('click', function(event){
-  event.preventDefault();
-  $('.dropdown').slideToggle('slow', function(event){
-    if($(this).is(':visible')){
-  });
-});
-</script>
 </body>
 </html>
