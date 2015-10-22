@@ -26,7 +26,7 @@ router.register(r'users', petitions.views.UserViewSet)
 router.register(r'petitions', petitions.views.PetitionViewSet)
 router.register(r'images', petitions.views.ImageUploadViewSet, 'image')
 router.register(r'petition_signs', petitions.views.PetitionSignViewSet)
-router.register(r'tags', petitions.views.TagsList)
+router.register(r'tags', petitions.views.TagsViewSet)
 
 
 

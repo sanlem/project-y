@@ -19,9 +19,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'username')
 
 
-class TagSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tag
+
 
 
 class PetitionSignSerializer(serializers.HyperlinkedModelSerializer):
@@ -153,6 +151,19 @@ class PetitionSerializerDetail(PetitionSerializer):
             instance.save()
 
         return super().update(instance, validated_data)
+
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ('name',)
+
+
+class TagSerializerDetail(TagSerializer):
+    petition_set = PetitionSerializerDetail(many=True)
+
+    class Meta(TagSerializer.Meta):
+        fields = TagSerializer.Meta.fields + ('petition_set',)
 
 
 class ImageUploadSerializer(serializers.Serializer):
