@@ -1,9 +1,17 @@
 @media (max-width:1140px){
-      .aside{
-            diaply:none;
+      .aside, .as{
+            display:none;
       }
-      .block{
+      .petitions{
             width:100%;
+            float:none;
+            margin:0 auto;
+      }
+      .tags{
+            padding:0;
+      }
+      .first-line,.second-line{
+            display:block;
       }
 }
 @media (max-width:768px){
